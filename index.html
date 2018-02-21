@@ -1,0 +1,48 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body id="colorpad" onkeypress="setRandomColor();playSounds()">
+<script>
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+
+function setRandomColor() {
+  $("#colorpad").css("background-color", getRandomColor());
+}
+</script>
+<div id="element"></div>
+<script>
+var sounds = ["http://www.denhaku.com/r_box/sr16/sr16bd/lostabrm.wav",
+              "http://bigsamples.free.fr/d_kit/clap/clap1.wav",
+              "http://www.denhaku.com/r_box/sr16/sr16perc/lodyncga.wav",
+              "http://vincentbernay.free.fr/free-percussions-loops/gong.mp3",
+			  "http://www.denhaku.com/r_box/sr16/sr16tom/mdroomtm.wav",
+			  "http://www.masterbits.de/sc_docu/sounds1/5PS00070.MP3",
+			  "http://stephane.brechet.free.fr/Sons/Wave/COW_BELL.WAV"],
+    oldSounds = [];
+
+var playSounds = function () {
+    var index = Math.floor(Math.random() * (sounds.length)),
+        thisSound = sounds[index];
+
+        oldSounds.push(thisSound);
+        sounds.splice(index, 1);
+
+        if (sounds.length < 1) {
+            sounds = oldSounds.splice(0, oldSounds.length);
+        }
+
+        $("#element").html("<audio autoplay><source src=\"" + thisSound + "\" type=\"audio/mpeg\"><embed src=\"" + thisSound + "\" hidden=\"true\" autostart=\"true\" /></audio>");
+}
+</script>
+</body>
+</html>
