@@ -21,6 +21,7 @@ function setRandomColor() {
 }
 </script>
 <div id="element"></div>
+<div id="gif" style="width:500px;height:300px;"></div>
 <script>
 var sounds = ["http://www.denhaku.com/r_box/sr16/sr16bd/lostabrm.wav",
               "http://bigsamples.free.fr/d_kit/clap/clap1.wav",
@@ -54,6 +55,23 @@ var playSounds = function () {
 
         $("#element").html("<audio autoplay><source src=\"" + thisSound + "\" type=\"audio/mpeg\"><embed src=\"" + thisSound + "\" hidden=\"true\" autostart=\"true\" /></audio>");
 }
+
+
+$(document).ready(function(){
+var images=['https://media.giphy.com/media/3o7qDQ4kcSD1PLM3BK/giphy.gif',
+            'https://media.giphy.com/media/5xaOcLGvzHxDKjufnLW/giphy.gif',
+            'https://media.giphy.com/media/l0HUqsz2jdQYElRm0/giphy.gif',
+            'https://media.giphy.com/media/6fScAIQR0P0xW/giphy.gif',
+            'https://media.giphy.com/media/jzaZ23z45UxK8/giphy.gif',
+			'https://media.giphy.com/media/w8f9g2x44aGI/giphy.gif',
+			'https://media.giphy.com/media/XotulrpeCFzXi/giphy.gif'];
+
+var randomNumber = Math.floor(Math.random() * images.length);
+var bgImg = 'url(' + images[randomNumber] + ')';
+
+$("#gif").css({'background':bgImg, 'background-size':'cover', });
+
+});
 </script>
 </body>
 </html>
