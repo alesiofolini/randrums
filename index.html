@@ -3,7 +3,7 @@
 <title>randrums</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
-<body id="colorpad" onkeypress="setRandomColor();playSounds()">
+<body id="colorpad" onkeypress="setRandomColor();playSounds();animateDivgif();animateDivinst();">
 <script>
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -93,6 +93,52 @@ $("#instrucciones").css({
         'left':posxh1+'px',
         'top':posyh1+'px'});
 });
+
+function makeNewPosition(){
+    
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    
+    return [nh,nw];    
+    
+}
+
+function animateDivgif(){
+    var newq = makeNewPosition();
+    var oldq = $("#gif").offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    
+    $("#gif").animate({ top: newq[0], left: newq[1] }, speed);
+    
+};
+
+function animateDivinst(){
+    var newq = makeNewPosition();
+    var oldq = $("#instrucciones").offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    
+    $("#instrucciones").animate({ top: newq[0], left: newq[1] }, speed);
+    
+};
+
+function calcSpeed(prev, next) {
+    
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+    
+    var greatest = x > y ? x : y;
+    
+    var speedModifier = 1;
+
+    var speed = Math.ceil(greatest/speedModifier);
+
+    return speed;
+
+}
 </script>
 </body>
 </html>
